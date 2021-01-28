@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">mdp3_android</string>
+    <string name="device_name">Nexus 5</string>
+    <string name="device_address">BC:F5:AC:33:38:CC</string>
+    <string name="device_status">connecting…</string>
+    <string name="paired_devices_label">Paired Devices</string>
+    <string name="available_devices_label">Available Devices</string>
+    <string name="refresh_devices_title">Refresh Devices List</string>
 </resources>
