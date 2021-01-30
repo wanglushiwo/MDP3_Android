@@ -27,7 +27,7 @@
             android:layout_height="600dp"
             android:layout_below="@+id/appbar">
 
-            <view
+            <View
                 android:id="@+id/mazeView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
