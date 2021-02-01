@@ -14,31 +14,186 @@
         <LinearLayout
             android:id="@+id/mazeLayout"
             android:layout_width="match_parent"
-            android:layout_height="600dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <View
-                android:id="@+id/mazeView"
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="648dp">
+
+                <view
+                    android:id="@+id/mazeView"
+                    class="com.example.mdp3_android.map.GridMap"
+                    android:layout_width="449dp"
+                    android:layout_height="567dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.404"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.156" />
+
+
+                <TextView
+                    android:id="@+id/robotStatusTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginLeft="28dp"
+                    android:text="Robot Status:"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/dark_green"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mazeView"
+                    app:layout_constraintVertical_bias="0.319" />
+
+                <TextView
+                    android:id="@+id/robotStatusTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginLeft="12dp"
+                    android:text="Not Available"
+                    android:textColor="@color/red"
+                    android:textSize="15sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/robotStatusTitleTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/mazeView"
+                    app:layout_constraintVertical_bias="0.319" />
+
+                <TextView
+                    android:id="@+id/directionTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginLeft="28dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Direction:"
+                    android:textColor="@color/dark_green"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/robotStatusTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/mazeView" />
+
+                <TextView
+                    android:id="@+id/directionTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    android:text="None"
+                    android:textColor="@color/red"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toEndOf="@+id/directionTitleTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/mazeView" />
+
+                <TextView
+                    android:id="@+id/coordinateTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Coordinates (X,Y):"
+                    android:textColor="@color/dark_green"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/directionTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/mazeView" />
+
+                <TextView
+                    android:id="@+id/leftBracketTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    android:text="("
+                    android:textColor="@color/dark_green"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/coordinateTitleTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/mazeView" />
+
+                <TextView
+                    android:id="@+id/xCoordTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    android:text="0"
+                    android:textColor="@color/red"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toEndOf="@+id/leftBracketTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/mazeView" />
+
+                <TextView
+                    android:id="@+id/commaTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    android:text=","
+                    android:textColor="@color/dark_green"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/xCoordTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/mazeView" />
+
+                <TextView
+                    android:id="@+id/yCoordTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    android:text="0"
+                    android:textColor="@color/red"
+                    android:textSize="15sp"
+                    app:layout_constraintStart_toEndOf="@+id/commaTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/mazeView" />
+
+                <TextView
+                    android:id="@+id/rightBracketTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="15dp"
+                    android:text=")"
+                    android:textColor="@color/dark_green"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toEndOf="@+id/yCoordTextView"
+                    app:layout_constraintTop_toBottomOf="@+id/mazeView" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="-15dp"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/dark_green"
+                    app:tabGravity="fill"
+                    app:tabIndicatorGravity="bottom"
+                    app:tabMode="scrollable" />
+            </androidx.viewpager.widget.ViewPager>
 
         </LinearLayout>
-
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/mazeLayout"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            >
-
-            <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabGravity="fill"
-                app:tabIndicatorGravity="bottom"
-                app:tabMode="scrollable" />
-        </androidx.viewpager.widget.ViewPager>
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
