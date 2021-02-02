@@ -12,34 +12,35 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="72dp"
         android:layout_marginLeft="72dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="302dp"
         android:layout_marginRight="302dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toStartOf="@+id/rightImgBtn"
-        app:layout_constraintHorizontal_bias="0.165"
+        app:layout_constraintHorizontal_bias="0.167"
         app:layout_constraintStart_toEndOf="@+id/leftImgBtn"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/tankup" />
 
     <ImageButton
-        android:id="@+id/downImgBtn"
+        android:id="@+id/backImgBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/rightImgBtn"
         app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toEndOf="@+id/leftImgBtn"
         app:layout_constraintTop_toBottomOf="@+id/forwardImgBtn"
-        app:layout_constraintVertical_bias="0.057"
+        app:layout_constraintVertical_bias="0.095"
         app:srcCompat="@drawable/tankdown" />
 
     <ImageButton
         android:id="@+id/rightImgBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="16dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.154"
@@ -54,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginLeft="24dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="24dp"
         android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/forwardImgBtn"
@@ -64,14 +65,14 @@
         android:id="@+id/phoneTiltSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="32dp"
         android:splitTrack="false"
         android:text="TILT OFF"
         android:textColor="@color/dark_green"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.032"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/downImgBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/backImgBtn" />
 
     <Button
         android:id="@+id/calibrateBtn"
@@ -84,12 +85,12 @@
         app:layout_constraintEnd_toStartOf="@+id/horizontalLineControl"
         app:layout_constraintHorizontal_bias="0.583"
         app:layout_constraintStart_toEndOf="@+id/phoneTiltSwitch"
-        app:layout_constraintTop_toBottomOf="@+id/downImgBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/backImgBtn" />
 
     <View
         android:id="@+id/verticalLineControl"
         android:layout_width="1.5dp"
-        android:layout_height="230dp"
+        android:layout_height="260dp"
         android:layout_marginTop="4dp"
         android:background="@color/dark_green"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,26 +102,27 @@
         android:id="@+id/horizontalLineControl"
         android:layout_width="350dp"
         android:layout_height="1.5dp"
+        android:layout_marginTop="10dp"
         android:background="@color/dark_green"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/verticalLineControl"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.12" />
+        app:layout_constraintTop_toBottomOf="@+id/fastestPathTimeTextView"
+        app:layout_constraintVertical_bias="0.048" />
 
     <TextView
         android:id="@+id/fastestPathTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:text="Fastest Path"
         android:textColor="@color/dark_green"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
-        app:layout_constraintStart_toStartOf="@+id/horizontalLineControl"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="@+id/verticalLineControl"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ToggleButton
@@ -128,58 +130,61 @@
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_centerVertical="true"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="64dp"
         android:background="@drawable/check_play_toggle"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:textOff=""
-        android:textOn=""
+        android:text="FASTEST"
+        android:textColor="#00000000"
+        android:textOff="FASTEST"
+        android:textOn="STOP"
         app:layout_constraintBottom_toTopOf="@+id/horizontalLineControl"
-        app:layout_constraintStart_toEndOf="@+id/verticalLineControl"
+        app:layout_constraintStart_toEndOf="@+id/rightImgBtn"
         app:layout_constraintTop_toBottomOf="@+id/fastestPathTitleTextView"
-        app:layout_constraintVertical_bias="0.435" />
+        app:layout_constraintVertical_bias="0.283" />
 
     <TextView
         android:id="@+id/fastestPathTimeTextView"
         android:layout_width="200dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rectangle_border"
         android:gravity="center"
         android:text="00:00"
         android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/horizontalLineControl"
         app:layout_constraintStart_toEndOf="@+id/fastestPathToggleBtn"
-        app:layout_constraintTop_toBottomOf="@+id/fastestPathTitleTextView"
-        app:layout_constraintVertical_bias="0.352" />
+        app:layout_constraintTop_toBottomOf="@+id/fastestPathTitleTextView" />
 
     <ImageButton
-        android:id="@+id/fastestPathResetBtn"
+        android:id="@+id/fastestPathResetImgBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
         android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="@+id/horizontalLineControl"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.407"
+        app:layout_constraintHorizontal_bias="0.404"
         app:layout_constraintStart_toEndOf="@+id/fastestPathTimeTextView"
+        app:layout_constraintTop_toBottomOf="@+id/fastestPathTitleTextView"
+        app:layout_constraintVertical_bias="0.017"
         app:srcCompat="@drawable/reload" />
 
     <TextView
         android:id="@+id/explorationTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="24dp"
         android:text="Exploration"
         android:textColor="@color/dark_green"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.472"
-        app:layout_constraintStart_toStartOf="@+id/horizontalLineControl"
-        app:layout_constraintTop_toTopOf="@+id/horizontalLineControl" />
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="@+id/verticalLineControl"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalLineControl" />
 
     <ToggleButton
         android:id="@+id/explorationToggleBtn"
@@ -192,33 +197,37 @@
         android:background="@drawable/check_play_toggle"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:textOff=""
-        android:textOn=""
+        android:text="Exploration"
+        android:textColor="#00000000"
+        android:textOff="EXPLORE"
+        android:textOn="STOP"
         app:layout_constraintStart_toStartOf="@+id/horizontalLineControl"
         app:layout_constraintTop_toBottomOf="@+id/explorationTitleTextView" />
 
     <TextView
         android:id="@+id/explorationTimeTextView"
         android:layout_width="200dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
         android:layout_marginLeft="12dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="16dp"
         android:background="@drawable/rectangle_border"
         android:gravity="center"
         android:text="00:00"
         android:textSize="26sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.025"
         app:layout_constraintStart_toEndOf="@+id/explorationToggleBtn"
         app:layout_constraintTop_toBottomOf="@+id/explorationTitleTextView" />
 
     <ImageButton
-        android:id="@+id/explorationResetBtn"
+        android:id="@+id/explorationResetImgBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="16dp"
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.413"
+        app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toEndOf="@+id/explorationTimeTextView"
         app:layout_constraintTop_toBottomOf="@+id/explorationTitleTextView"
         app:srcCompat="@drawable/reload" />

@@ -6,4 +6,7 @@
     <string name="paired_devices_label">Paired Devices</string>
     <string name="available_devices_label">Available Devices</string>
     <string name="refresh_devices_title">Refresh Devices List</string>
+    <string name="tab_map">Map</string>
+    <string name="tab_control">Controls</string>
+    <string name="tab_command">Commands</string>
 </resources>
