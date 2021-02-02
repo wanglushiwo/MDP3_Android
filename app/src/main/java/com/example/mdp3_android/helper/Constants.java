@@ -13,7 +13,4 @@ public class Constants {
 
     public static final String BLUETOOTH_ON = "BLUETOOTH ON";
     public static final String BLUETOOTH_OFF = "BLUETOOTH OFF";
-
-    public static final String TAB_NUMBER = "section number";
-    public static final int[] TAB_TITLE = new int[] {R.string.tab_title1, R.string.tab_title2, R.string.tab_title3};
 }

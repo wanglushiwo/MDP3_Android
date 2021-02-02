@@ -5,12 +5,12 @@
     <string name="device_status">connecting…</string>
     <string name="paired_devices_label">Paired Devices</string>
     <string name="available_devices_label">Available Devices</string>
+
     <string name="refresh_devices_title">SCAN</string>
     <string name="bluetooth_activity_name">Bluetooth</string>
     <string name="type_msg_hint">type something here ..</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="tab_title1">comms</string>
-    <string name="tab_title2">map</string>
-    <string name="tab_title3">controls</string>
+
+    <string name="tab_map">Map</string>
+    <string name="tab_control">Controls</string>
+    <string name="tab_command">Commands</string>
 </resources>
