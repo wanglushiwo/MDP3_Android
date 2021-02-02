@@ -1,39 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BluetoothActivity">
+    android:orientation="vertical"
+    tools:context=".bluetooth.BluetoothActivity">
+
+    <TextView
+        android:id="@+id/tvDeviceStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginRight="20dp"
+        android:text="CONNECTED"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        />
+
+    <Switch
+        android:id="@+id/bluetoothSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="20dp"
+        android:splitTrack="false"
+        android:text="BLUETOOTH OFF"
+        />
 
     <LinearLayout
         android:id="@+id/pairedDevLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="400dp"
+        android:layout_margin="20dp"
+        android:layout_below="@id/bluetoothSwitch"
         android:orientation="vertical"
         >
-
-        <Switch
-            android:id="@+id/bluetoothSwitch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:splitTrack="false"
-            android:text="OFF"
-            />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="23sp"
+            android:textStyle="bold"
             android:text="@string/paired_devices_label"
             />
 
         <ListView
             android:id="@+id/lvPairedDevices"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="400dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/availDevLayout"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_margin="20dp"
+            android:layout_below="@+id/pairedDevLayout"
+            android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textSize="23sp"
+            android:textStyle="bold"
             android:text="@string/available_devices_label"
             />
 
@@ -41,8 +79,8 @@
             android:id="@+id/lvAvailDevices"
             android:layout_width="match_parent"
             android:layout_height="300dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             />
     </LinearLayout>
-
-<!--    </RelativeLayout>-->
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

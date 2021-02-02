@@ -29,14 +29,4 @@
         android:textStyle="italic"
         android:textColor="#AFAFAF"
         android:layout_marginStart="8dp" />
-
-    <!-- Device status: connecting, connected, disconnected, pairing, paired -->
-    <TextView
-        android:id="@+id/tvDeviceStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:layout_below="@+id/tvDeviceAddress"
-        android:text="@string/device_status"
-        android:textSize="25sp"/>
 </RelativeLayout>
