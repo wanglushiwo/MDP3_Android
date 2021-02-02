@@ -441,7 +441,7 @@ public class GridMap extends View {
         row = this.convertRow(row);
         cells[col][row].setType("waypoint");
 
-//        MainActivity.printMessage("waypoint", waypointCoord[0]-1, waypointCoord[1]-1);
+        MainActivity.printMessage("waypoint", waypointCoord[0]-1, waypointCoord[1]-1);
         showLog("Exiting setWaypointCoord");
     }
 
@@ -597,7 +597,7 @@ public class GridMap extends View {
                     } else if(direction.equals("down")) {
                         directionInt = 2;
                     }
-//                    MainActivity.printMessage("starting " + "(" + String.valueOf(row-1) + "," + String.valueOf(column-1) + "," + String.valueOf(directionInt) + ")");
+                    MainActivity.printMessage("starting " + "(" + String.valueOf(row-1) + "," + String.valueOf(column-1) + "," + String.valueOf(directionInt) + ")");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

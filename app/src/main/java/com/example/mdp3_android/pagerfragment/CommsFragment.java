@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.mdp3_android.PageViewModel;
+import com.example.mdp3_android.bluetooth.BluetoothService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.nio.charset.Charset;
@@ -85,11 +86,11 @@ public class CommsFragment extends Fragment {
                 editor.commit();
                 messageReceivedTextView.setText(sharedPreferences.getString("message", ""));
                 typeBoxEditText.setText("");
-//
-//                if (BluetoothConnectionService.BluetoothConnectionStatus == true) {
-//                    byte[] bytes = sentText.getBytes(Charset.defaultCharset());
-//                    BluetoothConnectionService.write(bytes);
-//                }
+
+               if (BluetoothService.connStatusFlag == true) {
+                  byte[] bytes = sentText.getBytes(Charset.defaultCharset());
+                    BluetoothService.write(bytes);
+                }
                 showLog("Exiting sendTextBtn");
             }
         });

@@ -18,14 +18,13 @@ import java.util.ArrayList;
 /**
  * Created by Gwyn Bong Xiao Min on 26/1/2021.
  */
-class DevicesListAdapter extends ArrayAdapter<BluetoothDevice> {
+public class DevicesListAdapter extends ArrayAdapter<BluetoothDevice> {
 
     private LayoutInflater layoutInflater;
     private ArrayList<BluetoothDevice> devicesList;
     private int resourceId;
 
     public DevicesListAdapter(@NonNull Context context, int resource,
-                              LayoutInflater layoutInflater,
                               ArrayList<BluetoothDevice> devicesList) {
         super(context, resource, devicesList);
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

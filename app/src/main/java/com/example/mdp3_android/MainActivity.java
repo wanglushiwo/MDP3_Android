@@ -25,6 +25,7 @@ import com.example.mdp3_android.adapters.SectionsPagerAdapter;
 import com.example.mdp3_android.map.GridMap;
 import com.example.mdp3_android.pagerfragment.MapTabFragment;
 import com.google.android.material.tabs.TabLayout;
+import com.example.mdp3_android.pagerfragment.CommsFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,6 +34,13 @@ import org.json.JSONObject;
 import java.math.BigInteger;
 import java.nio.charset.Charset;
 import java.util.UUID;
+
+//import com.example.mdp3_android.adapters.ViewPagerAdapter;
+import com.example.mdp3_android.bluetooth.BluetoothActivity;
+import com.example.mdp3_android.bluetooth.BluetoothService;
+import com.google.android.material.tabs.TabLayout;
+
+import java.nio.charset.Charset;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -101,6 +109,50 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static void printMessage(String msg){
+        showLog("Entering printMessage");
+        editor = sharedPreferences.edit();
+        if(BluetoothService.connStatusFlag){
+            byte[] bytes = msg.getBytes(Charset.defaultCharset());
+            BluetoothService.write(bytes);
+        }
+        editor.putString("message", CommsFragment.getMessageReceivedTextView().getText() + "\n" + msg);
+        editor.commit();
+        refreshMessageReceived();
+    }
+
+    public static void printMessage(String name, int x, int y) throws JSONException {
+        showLog("Entering printMessage");
+        sharedPreferences();
+
+        JSONObject jsonObject = new JSONObject();
+        String message;
+
+        switch(name) {
+//            case "starting":
+            case "waypoint":
+                jsonObject.put(name, name);
+                jsonObject.put("x", x);
+                jsonObject.put("y", y);
+                message = name + " (" + x + "," + y + ")";
+                break;
+            default:
+                message = "Unexpected default for printMessage: " + name;
+                break;
+        }
+        editor.putString("message", CommsFragment.getMessageReceivedTextView().getText() + "\n" + message);
+        editor.commit();
+        if (BluetoothService.connStatusFlag == true) {
+            byte[] bytes = message.getBytes(Charset.defaultCharset());
+            BluetoothService.write(bytes);
+        }
+        showLog("Exiting printMessage");
+    }
+
+    public static void refreshMessageReceived() {
+        CommsFragment.getMessageReceivedTextView().setText(sharedPreferences.getString("message", ""));
     }
 
     public static TextView getRobotStatusTextView() {  return robotStatusTextView; }

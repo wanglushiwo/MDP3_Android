@@ -217,7 +217,7 @@ public class MapTabFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 showLog("Clicked updateButton");
-//                MainActivity.printMessage("sendArena");
+                MainActivity.printMessage("sendArena");
                 manualUpdateRequest = true;
                 showLog("Exiting updateButton");
                 try {
