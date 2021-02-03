@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
     public void refreshDirection(String direction) {
         gridMap.setRobotDirection(direction);
         directionAxisTextView.setText(sharedPreferences.getString("direction",""));
-//        printMessage("Direction is set to " + direction);
+        printMessage("Direction is set to " + direction);
     }
 
     public static void refreshLabel() {
