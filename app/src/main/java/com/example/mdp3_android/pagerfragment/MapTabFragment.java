@@ -65,7 +65,7 @@ public class MapTabFragment extends Fragment {
         View root = inflater.inflate(R.layout.activity_map, container, false);
 
         gridMap = MainActivity.getGridMap();
-//        final DirectionFragment directionFragment = new DirectionFragment();
+        final RobotDirectionFragment robotDirectionFragment = new RobotDirectionFragment();
 
         // Control Button
         resetMapBtn = root.findViewById(R.id.resetMapBtn);
@@ -121,14 +121,14 @@ public class MapTabFragment extends Fragment {
             }
         });
 
-//        directionChangeImageBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                showLog("Clicked directionChangeImageBtn");
-//                directionFragment.show(getActivity().getFragmentManager(), "Direction Fragment");
-//                showLog("Exiting directionChangeImageBtn");
-//            }
-//        });
+        directionChangeImageBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showLog("Clicked directionChangeImageBtn");
+                robotDirectionFragment.show(getActivity().getFragmentManager(), "Direction Fragment");
+                showLog("Exiting directionChangeImageBtn");
+            }
+        });
 
         exploredImageBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -200,9 +200,9 @@ public class MapTabFragment extends Fragment {
                         autoUpdate = false;
                         gridMap.toggleCheckedBtn("None");
                         updateButton.setClickable(true);
-                        updateButton.setTextColor(Color.BLACK);
+                        updateButton.setTextColor(Color.WHITE);
                         ControlsTabFragment.getCalibrateButton().setClickable(true);
-                        ControlsTabFragment.getCalibrateButton().setTextColor(Color.BLACK);
+                        ControlsTabFragment.getCalibrateButton().setTextColor(Color.WHITE);
                         manualAutoToggleBtn.setText("MANUAL");
                     } catch (JSONException e) {
                         e.printStackTrace();

@@ -12,5 +12,10 @@
 
     <string name="tab_map">Map</string>
     <string name="tab_control">Controls</string>
-    <string name="tab_command">Commands</string>
+    <string name="tab_message">Message</string>
+
+    <!-- Map -->
+    <string name="manual">MANUAL</string>
+    <string name="auto">AUTO</string>
+
 </resources>

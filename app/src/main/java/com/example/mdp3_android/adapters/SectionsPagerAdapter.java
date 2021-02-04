@@ -21,7 +21,7 @@ import com.example.mdp3_android.pagerfragment.PlaceholderFragment;
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
     @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_command, R.string.tab_map, R.string.tab_control};
+    private static final int[] TAB_TITLES = new int[]{R.string.tab_map, R.string.tab_control, R.string.tab_message};
     private final Context mContext;
 
     public SectionsPagerAdapter(Context context, FragmentManager fm) {
@@ -35,11 +35,11 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // Return a PlaceholderFragment (defined as a static inner class below).
         switch(position) {
             case 0:
-                return CommsFragment.newInstance(position +1);
-            case 1:
                 return MapTabFragment.newInstance(position+1);
-            case 2:
+            case 1:
                 return ControlsTabFragment.newInstance(position+1);
+            case 2:
+                return CommsFragment.newInstance(position +1);
             default:
                 return PlaceholderFragment.newInstance(position + 1);
         }

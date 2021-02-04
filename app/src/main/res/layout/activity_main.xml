@@ -43,7 +43,7 @@
                     android:layout_marginLeft="32dp"
                     android:text="Robot Status:"
                     android:textColor="@color/dark_green"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
                     android:layout_marginLeft="16dp"
                     android:text="Not Available"
                     android:textColor="@color/red"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/robotStatusTitleTextView"
                     app:layout_constraintTop_toBottomOf="@+id/mazeView"
@@ -73,7 +73,7 @@
 
                     android:text="Direction:"
                     android:textColor="@color/dark_green"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/robotStatusTextView"
                     app:layout_constraintTop_toBottomOf="@+id/mazeView" />
@@ -87,7 +87,7 @@
 
                     android:text="None"
                     android:textColor="@color/red"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@+id/directionTitleTextView"
                     app:layout_constraintTop_toBottomOf="@+id/mazeView" />
 
@@ -100,7 +100,7 @@
 
                     android:text="Coordinates (X,Y):"
                     android:textColor="@color/dark_green"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/directionTextView"
                     app:layout_constraintTop_toBottomOf="@+id/mazeView" />
@@ -114,7 +114,7 @@
 
                     android:text="("
                     android:textColor="@color/dark_green"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/coordinateTitleTextView"
                     app:layout_constraintTop_toBottomOf="@+id/mazeView" />
@@ -128,7 +128,7 @@
 
                     android:text="0"
                     android:textColor="@color/red"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@+id/leftBracketTextView"
                     app:layout_constraintTop_toBottomOf="@+id/mazeView" />
 
@@ -141,7 +141,7 @@
 
                     android:text=","
                     android:textColor="@color/dark_green"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/xCoordTextView"
                     app:layout_constraintTop_toBottomOf="@+id/mazeView" />
@@ -155,7 +155,7 @@
 
                     android:text="0"
                     android:textColor="@color/red"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     app:layout_constraintStart_toEndOf="@+id/commaTextView"
                     app:layout_constraintTop_toBottomOf="@+id/mazeView" />
 
@@ -168,7 +168,7 @@
 
                     android:text=")"
                     android:textColor="@color/dark_green"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/yCoordTextView"
                     app:layout_constraintTop_toBottomOf="@+id/mazeView" />
