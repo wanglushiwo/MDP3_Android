@@ -33,23 +33,24 @@
         android:text="BLUETOOTH OFF"
         />
 
+    <TextView
+        android:id="@+id/tvPaired"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/tvDeviceStatus"
+        android:text="@string/paired_devices_label"
+        />
     <LinearLayout
         android:id="@+id/pairedDevLayout"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_margin="20dp"
-        android:layout_below="@+id/tvDeviceStatus"
+        android:layout_below="@+id/tvPaired"
         android:orientation="vertical"
         >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textSize="23sp"
-            android:textStyle="bold"
-            android:text="@string/paired_devices_label"
-            />
-
         <ListView
             android:id="@+id/lvPairedDevices"
             android:layout_width="match_parent"
@@ -59,22 +60,24 @@
             />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tvAvail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/pairedDevLayout"
+        android:text="@string/available_devices_label"
+        />
+
     <LinearLayout
         android:id="@+id/availDevLayout"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_margin="20dp"
-            android:layout_below="@+id/pairedDevLayout"
+        android:layout_below="@+id/tvAvail"
             android:orientation="vertical">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:textSize="23sp"
-            android:textStyle="bold"
-            android:text="@string/available_devices_label"
-            />
 
         <ListView
             android:id="@+id/lvAvailDevices"
