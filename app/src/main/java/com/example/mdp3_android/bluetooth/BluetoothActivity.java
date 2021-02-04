@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -46,7 +48,9 @@ public class BluetoothActivity extends AppCompatActivity {
 
     ListView pairedDeviceListView;
     ListView availDeviceListView;
-    TextView connectStatus;
+    TextView connStatusTextView;
+    String connStatus;
+    ProgressDialog dialog;
 
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -95,12 +99,12 @@ public class BluetoothActivity extends AppCompatActivity {
         Switch bluetoothSwitch = (Switch) findViewById(R.id.bluetoothSwitch);
         pairedDeviceListView = (ListView) findViewById(R.id.lvPairedDevices);
         availDeviceListView = (ListView) findViewById(R.id.lvAvailDevices);
-        connectStatus = (TextView) findViewById(R.id.tvDeviceStatus);
+        connStatusTextView = (TextView) findViewById(R.id.tvDeviceStatus);
 
         if(bluetoothAdapter.isEnabled()){
             bluetoothSwitch.setChecked(true);
             bluetoothSwitch.setText(Constants.BLUETOOTH_ON);
-            scanNewDevices();
+            //scanNewDevices();
 
         } else {
             bluetoothSwitch.setChecked(false);
@@ -154,8 +158,8 @@ public class BluetoothActivity extends AppCompatActivity {
                                 new IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED);
                         registerReceiver(bluetoothStateReceiver, stateIntent);
 
-                        availDeviceListView.setVisibility(View.GONE);
-                        pairedDeviceListView.setVisibility(View.GONE);
+//                        availDeviceListView.setVisibility(View.GONE);
+//                        pairedDeviceListView.setVisibility(View.GONE);
 
                     }
                 }
@@ -196,6 +200,26 @@ public class BluetoothActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //update connection status
+        connStatus = "Disconnected";
+        sharedPreferences = getApplicationContext().getSharedPreferences("Shared Preferences",
+                                                                            Context.MODE_PRIVATE);
+        if(sharedPreferences.contains("connStatus")){
+            connStatus = sharedPreferences.getString("connStatus", "");
+        }
+
+        connStatusTextView.setText(connStatus);
+
+        dialog = new ProgressDialog(BluetoothActivity.this);
+        dialog.setMessage("Waiting for other devices to reconnect");
+        dialog.setCancelable(false);
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialog.dismiss();
+            }
+        });
     }
 
     @Override
@@ -212,7 +236,6 @@ public class BluetoothActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case android.R.id.home:
-
                 onBackPressed();
                 return true;
             case R.id.btnRefreshDevicesList:
@@ -228,6 +251,15 @@ public class BluetoothActivity extends AppCompatActivity {
                 }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        editor = sharedPreferences.edit();
+        editor.putString("connStatus", connStatusTextView.getText().toString());
+        editor.commit();
+        finish();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -369,7 +401,46 @@ public class BluetoothActivity extends AppCompatActivity {
     private BroadcastReceiver connectionReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
+            BluetoothDevice btDevice = intent.getParcelableExtra("Device");
+            String status = intent.getStringExtra("Status");
+            sharedPreferences =
+                    getApplicationContext().getSharedPreferences("Shared Preferences",
+                                                                    Context.MODE_PRIVATE);
+            editor = sharedPreferences.edit();
 
+            if(status.equals("connected")){
+                try{
+                    dialog.dismiss();
+                }catch (NullPointerException np){
+                    np.printStackTrace();
+                }
+
+                Toast.makeText(BluetoothActivity.this, "Device now connected to "
+                                + btDevice.getName(), Toast.LENGTH_LONG).show();
+                editor.putString("connStatus", "Connected to " + btDevice.getName());
+                connStatusTextView.setText("Connected to " + btDevice.getName());
+            } else if(status.equals("disconnected") && retryConnect == false){
+                Toast.makeText(BluetoothActivity.this, "Disconnected from "
+                                + btDevice.getName(), Toast.LENGTH_LONG).show();
+                bluetoothConnection = new BluetoothService(BluetoothActivity.this);
+
+                sharedPreferences =
+                        getApplicationContext().getSharedPreferences("Shared Preferences",
+                                                                        Context.MODE_PRIVATE);
+                editor = sharedPreferences.edit();
+                editor.putString("connStatus", "Disconnected");
+                connStatusTextView.setText("Disconnected");
+                editor.commit();
+
+                try {
+                    dialog.show();
+                } catch (Exception e){
+                    Log.d("BluetoothActivity", "Dialog Exception: Failed to show dialog");
+                }
+                retryConnect = true;
+                handler.postDelayed(runnable, 5000);
+            }
+            editor.commit();
         }
     };
 
@@ -386,6 +457,7 @@ public class BluetoothActivity extends AppCompatActivity {
             unregisterReceiver(bluetoothScanReceiver);
             unregisterReceiver(bluetoothStateReceiver);
             unregisterReceiver(bluetoothAvailDevicesReceiver);
+//            LocalBroadcastManager.getInstance(this).unregisterReceiver(connectionReceiver);
         } catch (IllegalArgumentException exception){
             exception.printStackTrace();
         }
@@ -400,8 +472,18 @@ public class BluetoothActivity extends AppCompatActivity {
             unregisterReceiver(bluetoothScanReceiver);
             unregisterReceiver(bluetoothStateReceiver);
             unregisterReceiver(bluetoothAvailDevicesReceiver);
+//            LocalBroadcastManager.getInstance(this).unregisterReceiver(connectionReceiver);
         } catch (IllegalArgumentException exception){
             exception.printStackTrace();
         }
+    }
+
+    @Override
+    public void finish() {
+        Intent data = new Intent();
+        data.putExtra("BTDevice", bTDevice);
+        data.putExtra("myUUID", Constants.MY_UUID);
+        setResult(RESULT_OK, data);
+        super.finish();
     }
 }

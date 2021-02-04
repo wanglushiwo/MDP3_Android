@@ -198,7 +198,7 @@ public class BluetoothService {
 
         public ConnectedThread(BluetoothSocket socket) {
 
-            connectStatus = new Intent("Connection Status");
+            connectStatus = new Intent("ConnectionStatus");
             connectStatus.putExtra("Status", "connected");
             connectStatus.putExtra("Device", bTDevice);
             LocalBroadcastManager.getInstance(context).sendBroadcast(connectStatus);
@@ -245,7 +245,7 @@ public class BluetoothService {
                 } catch (IOException e) {
                     Log.d(TAG, "Input stream was disconnected", e);
 
-                    connectStatus = new Intent("Connection Status");
+                    connectStatus = new Intent("ConnectionStatus");
                     connectStatus.putExtra("Status", "connected");
                     connectStatus.putExtra("Device", bTDevice);
                     LocalBroadcastManager.getInstance(context).sendBroadcast(connectStatus);
