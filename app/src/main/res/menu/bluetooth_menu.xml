@@ -4,5 +4,6 @@
     <item
         android:id="@+id/btnRefreshDevicesList"
         app:showAsAction="always"
+        android:onClick="scanNewDevices"
         android:title="@string/refresh_devices_title" />
 </menu>

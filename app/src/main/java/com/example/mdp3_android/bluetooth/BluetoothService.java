@@ -17,6 +17,7 @@ import com.example.mdp3_android.helper.Constants;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.util.UUID;
 
 import static android.content.ContentValues.TAG;
@@ -28,6 +29,8 @@ public class BluetoothService {
 
     private final BluetoothAdapter bluetoothAdapter;
     Context context;
+
+    public static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     private AcceptThread acceptThread;
 
@@ -56,8 +59,9 @@ public class BluetoothService {
             BluetoothServerSocket tmp = null;
             try {
                 // MY_UUID is the app's UUID string, also used by the client code.
-                tmp = bluetoothAdapter.listenUsingRfcommWithServiceRecord(Constants.APP_NAME,
-                        Constants.MY_UUID);
+                tmp = bluetoothAdapter.listenUsingInsecureRfcommWithServiceRecord(
+                                                                            Constants.APP_NAME,
+                                                                            MY_UUID);
             } catch (IOException e) {
                 Log.e(TAG, "Socket's listen() method failed", e);
             }
@@ -67,19 +71,19 @@ public class BluetoothService {
         public void run() {
             BluetoothSocket socket = null;
             // Keep listening until exception occurs or a socket is returned.
-            while (true) {
+//            while (true) {
                 try {
                     socket = bluetoothServerSocket.accept();
                 } catch (IOException e) {
                     Log.e(TAG, "Socket's accept() method failed", e);
-                    break;
+//                    break;
                 }
 
                 if (socket != null) {
                     // A connection was accepted. Perform work associated with
                     // the connection in a separate thread.
                     connectedSocket(socket, socket.getRemoteDevice());
-                }
+//                }
             }
         }
 
@@ -139,9 +143,7 @@ public class BluetoothService {
                     bluetoothActivity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(context,
-                                    "Connection to device failed.",
-                                    Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "Failed to connect to the Device.", Toast.LENGTH_LONG).show();
                         }
                     });
                 } catch (Exception ex) {
@@ -194,7 +196,7 @@ public class BluetoothService {
         private final BluetoothSocket socket;
         private final InputStream inputStream;
         private final OutputStream outputStream;
-        private byte[] buffer; // mmBuffer store for the stream
+//        private byte[] buffer; // mmBuffer store for the stream
 
         public ConnectedThread(BluetoothSocket socket) {
 
@@ -227,7 +229,7 @@ public class BluetoothService {
         }
 
         public void run() {
-            buffer = new byte[1024];
+            byte[] buffer = new byte[1024];
             int noBytes; // bytes returned from read()
 
             // Keep listening to the InputStream until an exception occurs.
@@ -246,7 +248,7 @@ public class BluetoothService {
                     Log.d(TAG, "Input stream was disconnected", e);
 
                     connectStatus = new Intent("ConnectionStatus");
-                    connectStatus.putExtra("Status", "connected");
+                    connectStatus.putExtra("Status", "disconnected");
                     connectStatus.putExtra("Device", bTDevice);
                     LocalBroadcastManager.getInstance(context).sendBroadcast(connectStatus);
 
@@ -259,6 +261,8 @@ public class BluetoothService {
 
         // Call this from the main activity to send data to the remote device.
         public void write(byte[] bytes) {
+            String text = new String(bytes, Charset.defaultCharset());
+            Log.d(TAG, "Write: Writing to output stream: " + text);
             try {
                 outputStream.write(bytes);
             } catch (IOException e) {

@@ -10,6 +10,7 @@ import android.app.ProgressDialog;
 import android.bluetooth.BluetoothDevice;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -66,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        UUID uuid = UUID.randomUUID();
+        Toast.makeText(this, uuid.toString(), Toast.LENGTH_LONG).show();
+
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.viewpager);
         viewPager.setAdapter(sectionsPagerAdapter);
@@ -93,6 +98,15 @@ public class MainActivity extends AppCompatActivity {
         // Robot Status
         robotStatusTextView = findViewById(R.id.robotStatusTextView);
 
+        myDialog = new ProgressDialog(MainActivity.this);
+        myDialog.setMessage("Waiting for the other device to reconnect ...");
+        myDialog.setCancelable(false);
+        myDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
     }
 
     @Override
@@ -298,7 +312,7 @@ public class MainActivity extends AppCompatActivity {
             String receivedText = sharedPreferences.getString("message", "") + "\n" + message;
             editor.putString("message", receivedText);
             editor.commit();
-//            refreshMessageReceived();
+            refreshMessageReceived();
         }
     };
 

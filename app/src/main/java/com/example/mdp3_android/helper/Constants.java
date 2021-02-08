@@ -9,7 +9,6 @@ import java.util.UUID;
  */
 public class Constants {
     public static final String APP_NAME = "GRP3";
-    public static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     public static final String BLUETOOTH_ON = "BLUETOOTH ON";
     public static final String BLUETOOTH_OFF = "BLUETOOTH OFF";
