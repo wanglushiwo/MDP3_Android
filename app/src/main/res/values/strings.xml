@@ -17,5 +17,6 @@
     <!-- Map -->
     <string name="manual">MANUAL</string>
     <string name="auto">AUTO</string>
+    <string name="comma">,</string>
 
 </resources>

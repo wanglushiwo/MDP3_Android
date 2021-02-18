@@ -18,13 +18,13 @@
             android:id="@+id/updateMapBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="18dp"
             android:layout_marginLeft="24dp"
             android:layout_marginTop="16dp"
             android:clickable="true"
             android:text="UPDATE"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.15"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toEndOf="@+id/resetMapBtn"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -32,8 +32,8 @@
             android:id="@+id/resetMapBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="332dp"
-            android:layout_marginLeft="332dp"
+            android:layout_marginStart="56dp"
+            android:layout_marginLeft="56dp"
             android:layout_marginTop="16dp"
 
             android:clickable="true"
@@ -89,20 +89,20 @@
             app:layout_constraintStart_toEndOf="@+id/clearImgBtn"
             app:layout_constraintTop_toBottomOf="@+id/setWayPointToggleBtn" />
 
-        <Switch
-            android:id="@+id/manualAutoToggleBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginLeft="64dp"
-            android:layout_marginTop="24dp"
-            android:text="MANUAL"
-            android:textColor="@color/dark_green"
-            android:textOff="@string/manual"
-            android:textOn="@string/auto"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+<!--        <Switch-->
+<!--            android:id="@+id/manualAutoToggleBtn"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="64dp"-->
+<!--            android:layout_marginLeft="64dp"-->
+<!--            android:layout_marginTop="24dp"-->
+<!--            android:text="MANUAL"-->
+<!--            android:textColor="@color/dark_green"-->
+<!--            android:textOff="@string/manual"-->
+<!--            android:textOn="@string/auto"-->
+<!--            android:textSize="20sp"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
 
 
         <TextView
@@ -159,21 +159,21 @@
             app:layout_constraintStart_toEndOf="@+id/clearTextView"
             app:layout_constraintTop_toBottomOf="@+id/changeDirectionImgBtn" />
 
+
         <ToggleButton
             android:id="@+id/setStartPointToggleBtn"
             android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="56dp"
             android:layout_marginLeft="56dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="72dp"
             android:background="@drawable/toggle_button_selector"
             android:textColor="@color/white"
             android:textOff="SET START POINT"
             android:textOn="CANCEL"
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/manualAutoToggleBtn" />
-
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ToggleButton
             android:id="@+id/setWayPointToggleBtn"
@@ -254,7 +254,7 @@
             android:id="@+id/hl"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="16dp"
             android:background="@color/dark_green"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/setStartPointToggleBtn"

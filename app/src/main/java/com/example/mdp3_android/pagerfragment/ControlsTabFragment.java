@@ -251,13 +251,13 @@ public class ControlsTabFragment extends Fragment implements SensorEventListener
                 ToggleButton fastestToggleBtn = (ToggleButton) v;
                 if (fastestToggleBtn.getText().equals("FASTEST")) {
                     showToast("Fastest timer stop!");
-                    robotStatusTextView.setText("Fastest Path Stopped");
+                    robotStatusTextView.setText("Fastest Stopped");
                     timerHandler.removeCallbacks(timerRunnableFastest);
                 }
                 else if (fastestToggleBtn.getText().equals("STOP")) {
                     showToast("Fastest timer start!");
                     MainActivity.printMessage("SP|");
-                    robotStatusTextView.setText("Fastest Path Started");
+                    robotStatusTextView.setText("Fastest Started");
                     fastestTimer = System.currentTimeMillis();
                     timerHandler.postDelayed(timerRunnableFastest, 0);
                 }

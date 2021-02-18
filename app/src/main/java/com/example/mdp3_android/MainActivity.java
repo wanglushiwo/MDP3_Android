@@ -14,16 +14,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mdp3_android.adapters.SectionsPagerAdapter;
 import com.example.mdp3_android.map.GridMap;
+import com.example.mdp3_android.pagerfragment.ControlsTabFragment;
 import com.example.mdp3_android.pagerfragment.MapTabFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.example.mdp3_android.pagerfragment.CommsFragment;
@@ -54,11 +59,17 @@ public class MainActivity extends AppCompatActivity {
     private static GridMap gridMap;
     static TextView xAxisTextView, yAxisTextView, directionAxisTextView;
     static TextView robotStatusTextView;
+    static Button f1, f2;
+    Button reconfigure;
+    ReconfigureFragment reconfigureFragment = new ReconfigureFragment();
 
 
     BluetoothDevice mBTDevice;
     private static UUID myUUID;
     ProgressDialog myDialog;
+
+    private static boolean autoUpdate = false;
+    public static boolean manualUpdateRequest = false;
 
     private static final String TAG = "Main Activity";
 
@@ -67,9 +78,6 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        UUID uuid = UUID.randomUUID();
-        Toast.makeText(this, uuid.toString(), Toast.LENGTH_LONG).show();
 
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.viewpager);
@@ -87,6 +95,44 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("connStatus", "Disconnected");
         editor.commit();
 
+        Switch manualAutoToggleBtn = findViewById(R.id.manualAutoToggleBtn);
+        manualAutoToggleBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showLog("Clicked manualAutoToggleBtn");
+                if (manualAutoToggleBtn.getText().equals("MANUAL")) {
+                    try {
+                        gridMap.setAutoUpdate(true);
+                        autoUpdate = true;
+                        gridMap.toggleCheckedBtn("None");
+                        MapTabFragment.getUpdateButton().setClickable(false);
+                        MapTabFragment.getUpdateButton().setTextColor(Color.GRAY);
+                        ControlsTabFragment.getCalibrateButton().setClickable(false);
+                        ControlsTabFragment.getCalibrateButton().setTextColor(Color.GRAY);
+                        manualAutoToggleBtn.setText("AUTO");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Toast.makeText(MainActivity.context, "Auto mode", Toast.LENGTH_SHORT).show();
+                }
+                else if (manualAutoToggleBtn.getText().equals("AUTO")) {
+                    try {
+                        gridMap.setAutoUpdate(false);
+                        autoUpdate = false;
+                        gridMap.toggleCheckedBtn("None");
+                        MapTabFragment.getUpdateButton().setClickable(true);
+                        MapTabFragment.getUpdateButton().setTextColor(Color.WHITE);
+                        ControlsTabFragment.getCalibrateButton().setClickable(true);
+                        ControlsTabFragment.getCalibrateButton().setTextColor(Color.WHITE);
+                        manualAutoToggleBtn.setText("MANUAL");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    Toast.makeText(MainActivity.context, "Manual mode", Toast.LENGTH_SHORT).show();
+                }
+                showLog("Exiting manualAutoToggleBtn");
+            }
+        });
 
         // Map
         gridMap = new GridMap(this);
@@ -107,6 +153,50 @@ public class MainActivity extends AppCompatActivity {
                 dialogInterface.dismiss();
             }
         });
+
+        f1 = (Button) findViewById(R.id.f1Button);
+        f2 = (Button) findViewById(R.id.f2Button);
+        reconfigure = (Button) findViewById(R.id.configureButton);
+
+        if (sharedPreferences.contains("F1")) {
+            f1.setContentDescription(sharedPreferences.getString("F1", ""));
+            showLog("set text for f1: " + f1.getContentDescription().toString());
+        }
+        if (sharedPreferences.contains("F2")) {
+            f2.setContentDescription(sharedPreferences.getString("F2", ""));
+            showLog("set text for f2: " + f2.getContentDescription().toString());
+        }
+
+        f1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showLog("Clicked f1 Button");
+                if (!f1.getContentDescription().toString().equals("empty"))
+                    MainActivity.printMessage(f1.getContentDescription().toString());
+                showLog("f1 Button value: " + f1.getContentDescription().toString());
+                showLog("Exiting f1 Button");
+            }
+        });
+
+        f2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showLog("Clicked f2 Button");
+                if (!f2.getContentDescription().toString().equals("empty"))
+                    MainActivity.printMessage(f2.getContentDescription().toString());
+                showLog("f2 Button value: " + f2.getContentDescription().toString());
+                showLog("Exiting f2 Button");
+            }
+        });
+
+        reconfigure.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showLog("Clicked reconfigureBtn");
+                reconfigureFragment.show(getFragmentManager(), "Reconfigure Fragment");
+                showLog("Exiting reconfigureBtn");
+            }
+        });
     }
 
     @Override
@@ -123,6 +213,19 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public static TextView getRobotStatusTextView() {  return robotStatusTextView; }
+
+    public static GridMap getGridMap() { return gridMap; }
+
+    public static Button getF1() { return f1; }
+
+    public static Button getF2() { return f2; }
+
+    public static void sharedPreferences() {
+        sharedPreferences = MainActivity.getSharedPreferences(MainActivity.context);
+        editor = sharedPreferences.edit();
     }
 
     public static void printMessage(String msg){
@@ -167,15 +270,6 @@ public class MainActivity extends AppCompatActivity {
 
     public static void refreshMessageReceived() {
         CommsFragment.getMessageReceivedTextView().setText(sharedPreferences.getString("message", ""));
-    }
-
-    public static TextView getRobotStatusTextView() {  return robotStatusTextView; }
-
-    public static GridMap getGridMap() { return gridMap; }
-
-    public static void sharedPreferences() {
-        sharedPreferences = MainActivity.getSharedPreferences(MainActivity.context);
-        editor = sharedPreferences.edit();
     }
 
     public void refreshDirection(String direction) {
@@ -369,6 +463,4 @@ public class MainActivity extends AppCompatActivity {
         outState.putString(TAG, "onSaveInstanceState");
         showLog("Exiting onSaveInstanceState");
     }
-
-
 }

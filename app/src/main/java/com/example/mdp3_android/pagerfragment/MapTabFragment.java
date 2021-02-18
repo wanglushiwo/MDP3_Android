@@ -1,5 +1,7 @@
 package com.example.mdp3_android.pagerfragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,10 +33,11 @@ public class MapTabFragment extends Fragment {
 
     private PageViewModel pageViewModel;
 
-    Button resetMapBtn, updateButton;
+    Button resetMapBtn;
+    static Button updateButton;
     ImageButton directionChangeImageBtn, exploredImageBtn, obstacleImageBtn, clearImageBtn;
     ToggleButton setStartPointToggleBtn, setWaypointToggleBtn;
-    Switch manualAutoToggleBtn;
+//    Switch manualAutoToggleBtn;
     GridMap gridMap;
     private static boolean autoUpdate = false;
     public static boolean manualUpdateRequest = false;
@@ -75,7 +78,7 @@ public class MapTabFragment extends Fragment {
         exploredImageBtn = root.findViewById(R.id.exploredImgBtn);
         obstacleImageBtn = root.findViewById(R.id.obstaclesImgBtn);
         clearImageBtn = root.findViewById(R.id.clearImgBtn);
-        manualAutoToggleBtn = root.findViewById(R.id.manualAutoToggleBtn);
+//        manualAutoToggleBtn = root.findViewById(R.id.manualAutoToggleBtn);
         updateButton = root.findViewById(R.id.updateMapBtn);
 
         // Button Listener
@@ -175,43 +178,43 @@ public class MapTabFragment extends Fragment {
             }
         });
 
-        manualAutoToggleBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showLog("Clicked manualAutoToggleBtn");
-                if (manualAutoToggleBtn.getText().equals("MANUAL")) {
-                    try {
-                        gridMap.setAutoUpdate(true);
-                        autoUpdate = true;
-                        gridMap.toggleCheckedBtn("None");
-                        updateButton.setClickable(false);
-                        updateButton.setTextColor(Color.GRAY);
-                        ControlsTabFragment.getCalibrateButton().setClickable(false);
-                        ControlsTabFragment.getCalibrateButton().setTextColor(Color.GRAY);
-                        manualAutoToggleBtn.setText("AUTO");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    showToast("AUTO mode");
-                }
-                else if (manualAutoToggleBtn.getText().equals("AUTO")) {
-                    try {
-                        gridMap.setAutoUpdate(false);
-                        autoUpdate = false;
-                        gridMap.toggleCheckedBtn("None");
-                        updateButton.setClickable(true);
-                        updateButton.setTextColor(Color.WHITE);
-                        ControlsTabFragment.getCalibrateButton().setClickable(true);
-                        ControlsTabFragment.getCalibrateButton().setTextColor(Color.WHITE);
-                        manualAutoToggleBtn.setText("MANUAL");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    showToast("MANUAL mode");
-                }
-                showLog("Exiting manualAutoToggleBtn");
-            }
-        });
+//        manualAutoToggleBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                showLog("Clicked manualAutoToggleBtn");
+//                if (manualAutoToggleBtn.getText().equals("MANUAL")) {
+//                    try {
+//                        gridMap.setAutoUpdate(true);
+//                        autoUpdate = true;
+//                        gridMap.toggleCheckedBtn("None");
+//                        updateButton.setClickable(false);
+//                        updateButton.setTextColor(Color.GRAY);
+//                        ControlsTabFragment.getCalibrateButton().setClickable(false);
+//                        ControlsTabFragment.getCalibrateButton().setTextColor(Color.GRAY);
+//                        manualAutoToggleBtn.setText("AUTO");
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                    showToast("AUTO mode");
+//                }
+//                else if (manualAutoToggleBtn.getText().equals("AUTO")) {
+//                    try {
+//                        gridMap.setAutoUpdate(false);
+//                        autoUpdate = false;
+//                        gridMap.toggleCheckedBtn("None");
+//                        updateButton.setClickable(true);
+//                        updateButton.setTextColor(Color.WHITE);
+//                        ControlsTabFragment.getCalibrateButton().setClickable(true);
+//                        ControlsTabFragment.getCalibrateButton().setTextColor(Color.WHITE);
+//                        manualAutoToggleBtn.setText("MANUAL");
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                    showToast("MANUAL mode");
+//                }
+//                showLog("Exiting manualAutoToggleBtn");
+//            }
+//        });
 
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -239,6 +242,10 @@ public class MapTabFragment extends Fragment {
 
     private void showToast(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    public static Button getUpdateButton() {
+        return updateButton;
     }
 
 
