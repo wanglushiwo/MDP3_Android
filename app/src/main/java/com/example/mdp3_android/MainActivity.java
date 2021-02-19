@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
     public static void printMessage(String msg){
         showLog("Entering printMessage");
         editor = sharedPreferences.edit();
-        if(BluetoothService.connStatusFlag){
+        if(BluetoothService.BluetoothConnectionStatus){
             byte[] bytes = msg.getBytes(Charset.defaultCharset());
             BluetoothService.write(bytes);
         }
@@ -261,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
         }
         editor.putString("message", CommsFragment.getMessageReceivedTextView().getText() + "\n" + message);
         editor.commit();
-        if (BluetoothService.connStatusFlag == true) {
+        if (BluetoothService.BluetoothConnectionStatus == true) {
             byte[] bytes = message.getBytes(Charset.defaultCharset());
             BluetoothService.write(bytes);
         }
@@ -315,14 +315,14 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 Log.d(TAG, "mBroadcastReceiver5: Device now connected to "+mDevice.getName());
-                Toast.makeText(MainActivity.this, "Device now connected to "+mDevice.getName(), Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Device now connected to "+mDevice.getName(), Toast.LENGTH_SHORT).show();
                 editor.putString("connStatus", "Connected to " + mDevice.getName());
 //                TextView connStatusTextView = findViewById(R.id.connStatusTextView);
 //                connStatusTextView.setText("Connected to " + mDevice.getName());
             }
             else if(status.equals("disconnected")){
                 Log.d(TAG, "mBroadcastReceiver5: Disconnected from "+mDevice.getName());
-                Toast.makeText(MainActivity.this, "Disconnected from "+mDevice.getName(), Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "Disconnected from "+mDevice.getName(), Toast.LENGTH_SHORT).show();
 //                mBluetoothConnection = new BluetoothConnectionService(MainActivity.this);
 //                mBluetoothConnection.startAcceptThread();
 

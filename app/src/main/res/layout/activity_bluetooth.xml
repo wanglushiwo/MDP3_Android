@@ -21,18 +21,18 @@
         android:layout_alignParentLeft="true"
         />
 
-    <Switch
-        android:id="@+id/bluetoothSwitch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginLeft="20dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="20dp"
-        android:splitTrack="false"
-        android:text="BLUETOOTH OFF"
-        />
+<!--    <Switch-->
+<!--        android:id="@+id/bluetoothSwitch"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:layout_marginLeft="20dp"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_marginStart="20dp"-->
+<!--        android:splitTrack="false"-->
+<!--        android:text="BLUETOOTH OFF"-->
+<!--        />-->
 
     <TextView
         android:id="@+id/tvPaired"

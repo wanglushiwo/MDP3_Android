@@ -87,7 +87,7 @@ public class CommsFragment extends Fragment {
                 messageReceivedTextView.setText(sharedPreferences.getString("message", ""));
                 typeBoxEditText.setText("");
 
-               if (BluetoothService.connStatusFlag == true) {
+               if (BluetoothService.BluetoothConnectionStatus == true) {
                   byte[] bytes = sentText.getBytes(Charset.defaultCharset());
                     BluetoothService.write(bytes);
                 }
