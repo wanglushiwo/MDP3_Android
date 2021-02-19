@@ -135,7 +135,7 @@ public class BluetoothService {
                     mBluetoothPopUpActivity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(mContext, "Failed to connect to the Device.", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(mContext, "Failed to connect to the Device.", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } catch (Exception z) {
