@@ -69,6 +69,7 @@ public class BluetoothActivity extends AppCompatActivity {
            try {
                if(BluetoothService.BluetoothConnectionStatus == false){
                    connectDevice(bTDevice, MY_UUID);
+//                   activateConnection();
                    Toast.makeText(BluetoothActivity.this,
                            "Successfuly reconnected!", Toast.LENGTH_SHORT).show();
                }
@@ -104,13 +105,12 @@ public class BluetoothActivity extends AppCompatActivity {
         pairedDevices = new ArrayList<>();
         availDevices = new ArrayList<>();
 
-        Switch bluetoothSwitch = (Switch) findViewById(R.id.bluetoothSwitch);
+//        Switch bluetoothSwitch = (Switch) findViewById(R.id.bluetoothSwitch);
         pairedDeviceListView = (ListView) findViewById(R.id.lvPairedDevices);
         availDeviceListView = (ListView) findViewById(R.id.lvAvailDevices);
         connStatusTextView = (TextView) findViewById(R.id.tvDeviceStatus);
-
         //update connection status
-        connStatus = "Disconnected";
+//        connStatus = "Disconnected";
 
 //        if(bluetoothAdapter.isEnabled()){
 //            bluetoothSwitch.setChecked(true);
@@ -260,7 +260,8 @@ public class BluetoothActivity extends AppCompatActivity {
             }
         });
 
-
+        //update connection status
+        connStatus = "Disconnected";
         connStatusTextView.setText(connStatus);
 
         sharedPreferences = getApplicationContext().getSharedPreferences("Shared Preferences",
