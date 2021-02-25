@@ -79,7 +79,7 @@ public class MapTabFragment extends Fragment {
         obstacleImageBtn = root.findViewById(R.id.obstaclesImgBtn);
         clearImageBtn = root.findViewById(R.id.clearImgBtn);
 //        manualAutoToggleBtn = root.findViewById(R.id.manualAutoToggleBtn);
-        updateButton = root.findViewById(R.id.updateMapBtn);
+//        updateButton = root.findViewById(R.id.updateMapBtn);
 
         // Button Listener
         resetMapBtn.setOnClickListener(new View.OnClickListener() {
@@ -216,23 +216,24 @@ public class MapTabFragment extends Fragment {
 //            }
 //        });
 
-        updateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showLog("Clicked updateButton");
-                MainActivity.printMessage("sendArena");
-                manualUpdateRequest = true;
-                showLog("Exiting updateButton");
-                try {
-                    String message = "{\"map\":[{\"explored\": \"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\",\"length\":300,\"obstacle\":\"00000000000000000706180400080010001e000400000000200044438f840000000000000080\"}]}";
+//        updateButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showLog("Clicked updateButton");
+//                MainActivity.printMessage("sendArena");
+//                manualUpdateRequest = true;
+//                showLog("Exiting updateButton");
+//                try {
+//                    String message = "{\"map\":[{\"explored\": \"ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\",\"length\":300,\"obstacle\":\"00000000000000000706180400080010001e000400000000200044438f840000000000000080\"}]}";
+//
+//                    gridMap.setReceivedJsonObject(new JSONObject(message));
+//                    gridMap.updateMapInformation();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
 
-                    gridMap.setReceivedJsonObject(new JSONObject(message));
-                    gridMap.updateMapInformation();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
         return root;
     }
 

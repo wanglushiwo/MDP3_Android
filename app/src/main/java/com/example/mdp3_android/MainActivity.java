@@ -105,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
                         gridMap.setAutoUpdate(true);
                         autoUpdate = true;
                         gridMap.toggleCheckedBtn("None");
-                        MapTabFragment.getUpdateButton().setClickable(false);
-                        MapTabFragment.getUpdateButton().setTextColor(Color.GRAY);
+//                        MapTabFragment.getUpdateButton().setClickable(false);
+//                        MapTabFragment.getUpdateButton().setTextColor(Color.GRAY);
                         ControlsTabFragment.getCalibrateButton().setClickable(false);
                         ControlsTabFragment.getCalibrateButton().setTextColor(Color.GRAY);
                         manualAutoToggleBtn.setText("AUTO");
@@ -120,8 +120,8 @@ public class MainActivity extends AppCompatActivity {
                         gridMap.setAutoUpdate(false);
                         autoUpdate = false;
                         gridMap.toggleCheckedBtn("None");
-                        MapTabFragment.getUpdateButton().setClickable(true);
-                        MapTabFragment.getUpdateButton().setTextColor(Color.WHITE);
+//                        MapTabFragment.getUpdateButton().setClickable(true);
+//                        MapTabFragment.getUpdateButton().setTextColor(Color.WHITE);
                         ControlsTabFragment.getCalibrateButton().setClickable(true);
                         ControlsTabFragment.getCalibrateButton().setTextColor(Color.WHITE);
                         manualAutoToggleBtn.setText("MANUAL");
