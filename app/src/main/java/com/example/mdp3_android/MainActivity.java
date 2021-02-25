@@ -95,6 +95,22 @@ public class MainActivity extends AppCompatActivity {
         editor.putString("connStatus", "Disconnected");
         editor.commit();
 
+        Button printMDFStringButton = (Button) findViewById(R.id.printMdfBtn);
+        printMDFStringButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String message = "Explored : " + GridMap.getPublicMDFExploration();
+                editor = sharedPreferences.edit();
+                editor.putString("message", CommsFragment.getMessageReceivedTextView().getText() + "\n" + message);
+                editor.commit();
+                refreshMessageReceived();
+                message = "Obstacle : " + GridMap.getPublicMDFObstacle() + "0";
+                editor.putString("message", CommsFragment.getMessageReceivedTextView().getText() + "\n" + message);
+                editor.commit();
+                refreshMessageReceived();
+            }
+        });
+
         Switch manualAutoToggleBtn = findViewById(R.id.manualAutoToggleBtn);
         manualAutoToggleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
