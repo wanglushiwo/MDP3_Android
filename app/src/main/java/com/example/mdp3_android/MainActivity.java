@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.commit();
                 refreshMessageReceived();
                 message = "Obstacle : " + GridMap.getPublicMDFObstacle() + "0";
+                showLog(message);
                 editor.putString("message", CommsFragment.getMessageReceivedTextView().getText() + "\n" + message);
                 editor.commit();
                 refreshMessageReceived();
